@@ -1,6 +1,12 @@
 import pandas as pd
 import numpy as np
 
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+
+# https://www.cnblogs.com/cafe3165/p/9145427.html
 
 if __name__ == '__main__':
     pd.set_option('display.max_rows', 1000, 'display.max_columns', 1000, "display.max_colwidth", 1000, 'display.width',
@@ -20,6 +26,21 @@ if __name__ == '__main__':
 
     # 合并数据
     asd_dataset = np.vstack((protect_data, risk_data))
-    print(asd_dataset)
+    # 数据标准化对象
+    data_std = StandardScaler()
+    # 获取数据和标签
+    asd_target = asd_dataset[:, asd_dataset.shape[1] - 1]
+    asd_data = data_std.fit_transform(asd_dataset[:, 0: asd_dataset.shape[1] - 1])
 
-    print('xxx')
+    # 分割数据集
+    train_data, test_data, train_labels, test_labels = train_test_split(asd_data, asd_target, test_size=0.2, shuffle=True)
+
+    # 拟合数据
+    clf = SVC(kernel='linear', C=0.4, gamma='auto')
+    clf.fit(train_data, train_labels)
+
+    # 预测数据
+    pred_labels = clf.predict(test_data)
+
+    # 打印结果
+    print(classification_report(test_labels, pred_labels))
