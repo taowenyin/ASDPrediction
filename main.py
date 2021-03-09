@@ -9,6 +9,7 @@ from sklearn.metrics import classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score as AUC
+from imblearn.over_sampling import SMOTE
 
 # https://www.cnblogs.com/cafe3165/p/9145427.html
 
@@ -36,6 +37,10 @@ if __name__ == '__main__':
     # 获取数据和标签
     asd_target = asd_dataset[:, asd_dataset.shape[1] - 1]
     asd_data = data_std.fit_transform(asd_dataset[:, 0: asd_dataset.shape[1] - 1])
+
+    # 采用过采样解决数据不平衡的问题
+    smot_model = SMOTE(random_state=20)
+    asd_data, asd_target = smot_model.fit_resample(asd_data, asd_target)
 
     # 分割数据集
     train_data, test_data, train_labels, test_labels = train_test_split(asd_data, asd_target, test_size=0.2,
