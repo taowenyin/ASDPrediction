@@ -11,8 +11,6 @@ from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score as AUC
 from imblearn.over_sampling import SMOTE
 
-# https://www.cnblogs.com/cafe3165/p/9145427.html
-
 if __name__ == '__main__':
     pd.set_option('display.max_rows', 1000, 'display.max_columns', 1000, "display.max_colwidth", 1000, 'display.width',
                   1000)
