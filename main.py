@@ -19,12 +19,12 @@ if __name__ == '__main__':
 
     # 读取保护数据
     protect_data = pd.read_excel('data/protect_data.xlsx', sheet_name='ASD-保护因素条目',
-                                 usecols=[5, 7, 17, 23, 32, 34, 36, 41], header=[0])
+                                 usecols=[5, 7, 17, 23, 32, 34, 36, 41, 51], header=[0])
     protect_data['target'] = 1
     protect_data = np.array(protect_data)
     # 读取风险数据
-    risk_data = pd.read_excel('data/risk_data.xlsx', sheet_name='Sheet1',
-                              usecols=[5, 7, 17, 23, 32, 34, 36, 41], header=[1])
+    risk_data = pd.read_excel('data/risk_data.xlsx', sheet_name='风险因素数据',
+                              usecols=[5, 7, 17, 23, 32, 34, 36, 41, 52], header=[1])
     risk_data['target'] = 0
     risk_data = np.array(risk_data)
 
