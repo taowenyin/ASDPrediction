@@ -45,7 +45,7 @@ if __name__ == '__main__':
                                                                         shuffle=True, random_state=20)
 
     # SVM拟合数据
-    svm_clf = SVC(kernel='linear', C=0.4, class_weight='balanced')
+    svm_clf = SVC(kernel='linear', C=0.6, class_weight='balanced')
     svm_clf.fit(train_data, train_labels)
     # 预测数据
     svm_pred_labels = svm_clf.predict(test_data)
@@ -54,7 +54,7 @@ if __name__ == '__main__':
     print(classification_report(test_labels, svm_pred_labels))
 
     # 拟合数据
-    logreg_clf = LogisticRegression(C=0.4, class_weight='balanced')
+    logreg_clf = LogisticRegression(C=0.6, class_weight='balanced')
     logreg_clf.fit(train_data, train_labels)
     # 预测数据
     logreg_pred_labels = logreg_clf.predict(test_data)
